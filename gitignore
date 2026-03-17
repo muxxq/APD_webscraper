@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual Environment
+venv/
+env/
+.env/
+.venv/
+
+# Data output (nu vrem sa dam push la date scraped)
+data/output/*.csv
+data/output/*.xlsx
+data/output/*.json
+
+# Benchmarks output
+benchmarks/results/*.png
+benchmarks/results/*.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
