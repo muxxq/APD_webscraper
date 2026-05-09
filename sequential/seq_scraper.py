@@ -1,39 +1,63 @@
-from ast import main
-
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
+import sys
+import os
 import time
 
-def fetch_page(url):
-    response = requests.get(url)
-    response.raise_for_status()
-    return response.text
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_root)
 
-def parse_page(html):
-    soup = BeautifulSoup(html, 'html.parser')
-    books = soup.find_all("article", class_="product_pod")
-    return books
+from utils import fetch_page, write_to_csv
+from utils.parsers.emag_parser import parse_emag
+from utils.parsers.altex_parser import parse_altex
 
-def write_to_csv(books,start_time):
-    with open('data/output/books.csv', 'w', encoding='utf-8') as csvfile:
-        csvfile.write("Title,Price,Execution Time\n")
-        for book in books:
-            title = book.h3.a['title']
-            price = book.find("p", class_="price_color").text.strip()
-            csvfile.write(f"{title},{price}\n")
-        end_time = time.time() - start_time
-        csvfile.write(f"Execution Time: {end_time:.2f} seconds\n")
 def main():
-
-    url = "https://books.toscrape.com/catalogue/page-1.html"
-
+    NUM_PAGES = 5
+    
+    print(f"Starting sequential scraper for eMAG and Altex (up to {NUM_PAGES} pages)...")
     start_time = time.time()
+    
+    all_data = []
 
-    html = fetch_page(url)
-    books = parse_page(html)
+    # 1. Scrape eMAG
+    print("\n[eMAG] Starting extraction...")
+    for page in range(1, NUM_PAGES + 1):
+        url = f"https://www.emag.ro/laptopuri/p{page}/c"
+        print(f"Fetching eMAG Page {page}: {url}")
+        
+        html = fetch_page(url)
+        if html:
+            products = parse_emag(html)
+            print(f"Extracted {len(products)} products.")
+            all_data.extend(products)
+            
+        time.sleep(1) 
 
-    write_to_csv(books,start_time)
+    # 2. Scrape Altex
+    print("\n[Altex] Starting extraction...")
+    for page in range(1, NUM_PAGES + 1):
+        url = f"https://altex.ro/laptopuri/cpl/filtru/p/{page}/"
+        print(f"Fetching Altex Page {page}: {url}")
+        
+        html = fetch_page(url)
+        if html:
+            products = parse_altex(html)
+            print(f"Extracted {len(products)} products.")
+            all_data.extend(products)
+            
+        time.sleep(1)
+
+    print(f"\nExtraction done. Total products: {len(all_data)}")
+    
+    if all_data:
+        # Salvare in fisier CSV
+        output_filepath = os.path.join(project_root, 'data', 'output', 'laptops.csv')
+        write_to_csv(all_data, filepath=output_filepath)
+        
+        total_time = time.time() - start_time
+        print(f"\nTime spent: {total_time:.3f} seconds")
+    else:
+        print("Scraping failed or blocked: No data extracted.")
+        total_time = time.time() - start_time
+        print(f"\nTime spent: {total_time:.3f} seconds")
 
 if __name__ == "__main__":
     main()

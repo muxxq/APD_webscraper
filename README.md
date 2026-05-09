@@ -1,7 +1,7 @@
-# 📚 Books to Scrape — Web Scraper (Sequential & Parallel)
+# 🛒 E-commerce Web Scraper (Sequential & Parallel)
 
 Proiect realizat în cadrul cursului **APD (Algoritmi Paraleli și Distribuiți)**.  
-Target: [books.toscrape.com](https://books.toscrape.com) — site de test dedicat web scraping-ului.
+Target: Magazine online din România (ex. [eMAG](https://www.emag.ro), [Altex](https://www.altex.ro)) — extragerea datelor pentru diferite categorii de produse (ex. laptopuri).
 
 ---
 
@@ -97,13 +97,11 @@ python benchmarks/compare.py
 
 ## 📊 Date extrase
 
-Din fiecare carte de pe `books.toscrape.com`:
+Pentru fiecare produs extras de pe site-urile vizate (eMAG, Altex):
 
-- Titlu
-- Preț
-- Rating (stele)
-- Disponibilitate (In stock / Out of stock)
-- URL pagina carte
+- Magazinul sursă (Store)
+- Denumire produs
+- Preț curent
 
 ---
 
@@ -119,9 +117,9 @@ Din fiecare carte de pe `books.toscrape.com`:
 
 ## ⚠️ Note
 
-- Site-ul `books.toscrape.com` este creat **special pentru practică** de web scraping — nicio restricție legală.
-- Totuși, adăugat delay între request-uri pentru a nu supraîncărca serverul.
-- Se respectă bunele practici: `User-Agent` header, retry logic, rate limiting.
+- Scraping-ul este realizat exclusiv în **scop educațional**, pentru a demonstra diferențele de performanță între execuția secvențială și cea paralelă din cadrul cursului APD.
+- S-a adăugat delay între request-uri pentru a nu supraîncărca serverele magazinelor și pentru a evita pe cât posibil blocajele (ex. CAPTCHA, Rate Limiting).
+- Se recomandă folosirea de headere corespunzătoare (`User-Agent`) la rulare.
 
 ---
 
