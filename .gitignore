@@ -11,14 +11,12 @@ env/
 .env/
 .venv/
 
-# Data output (nu vrem sa dam push la date scraped)
+# Data output (nu vrem sa dam push la date scraped sau grafice)
+data/output/**/*.csv
+data/output/**/*.xlsx
+data/output/**/*.json
 data/output/*.csv
-data/output/*.xlsx
-data/output/*.json
-
-# Benchmarks output
-benchmarks/results/*.png
-benchmarks/results/*.csv
+data/output/*.png
 
 # IDE
 .vscode/

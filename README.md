@@ -34,20 +34,27 @@ Implementarea unui web scraper în **3 variante** cu scopul de a compara perform
 ```
 web-scraper/
 ├── sequential/
-│   └── scraper_seq.py          # Varianta secventiala
+│   └── seq_scraper.py          # Varianta secventiala
 ├── parallel/
 │   ├── scraper_threads.py      # Varianta paralela #1 — Threads
 │   └── scraper_multiprocess.py # Varianta paralela #2 — Multiprocessing
 ├── utils/
-│   ├── parser.py               # Logica de parsare HTML
-│   ├── storage.py              # Salvare date CSV/Excel
-│   └── metrics.py              # Masurare timp, CPU, RAM
+│   ├── __init__.py             # Exporturi comune
+│   ├── fetcher.py              # Logica de descarcare pagini HTTP
+│   ├── scraper.py              # Logica de extragere si retries
+│   ├── writer.py               # Salvare date in format CSV
+│   └── parsers/                
+│       └── emag_parser.py      # Logica de parsare HTML (BeautifulSoup)
 ├── data/
-│   └── output/                 # Rezultate scraping (ignorat de git)
+│   └── output/                 # Rezultate scraping impartite pe metode
+│       ├── secvential/
+│       ├── threads/
+│       └── multiprocess/
 ├── benchmarks/
-│   └── compare.py              # Grafice comparative
+│   └── run_benchmarks.py       # Script pentru rulare benchmark-uri si generare grafice
 ├── requirements.txt
 ├── .gitignore
+├── Tema_Proiect.md
 └── README.md
 ```
 
@@ -84,13 +91,16 @@ pip install -r requirements.txt
 
 ```bash
 # Varianta secventiala
-python sequential/scraper_seq.py
+python sequential/seq_scraper.py
 
-# Varianta paralela #1
+# Varianta paralela #1 (Threads)
 python parallel/scraper_threads.py
 
-# Benchmark comparativ
-python benchmarks/compare.py
+# Varianta paralela #2 (Multiprocess)
+python parallel/scraper_multiprocess.py
+
+# Rulare teste de performanta (Benchmark comparativ)
+python benchmarks/run_benchmarks.py
 ```
 
 ---

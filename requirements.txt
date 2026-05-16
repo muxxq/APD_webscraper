@@ -2,3 +2,5 @@ beautifulsoup4==4.12.3
 requests==2.31.0
 cloudscraper==1.2.7
 curl_cffi==0.14.0
+matplotlib>=3.8.0
+numpy>=1.26.0
