@@ -1,0 +1,4 @@
+Pages,Sequential_Time,Threads_Time,Multiprocess_Time,Threads_Speedup,Multiprocess_Speedup
+3,9.89,5.44,8.09,1.82,1.22
+10,33.83,11.45,17.84,2.96,1.90
+30,98.67,26.26,47.16,3.76,2.09

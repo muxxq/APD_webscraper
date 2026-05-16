@@ -1,7 +1,7 @@
 # 🛒 E-commerce Web Scraper (Sequential & Parallel)
 
 Proiect realizat în cadrul cursului **APD (Algoritmi Paraleli și Distribuiți)**.  
-Target: Magazine online din România (ex. [eMAG](https://www.emag.ro), [Altex](https://www.altex.ro)) — extragerea datelor pentru diferite categorii de produse (ex. laptopuri).
+Target: Magazinul online [eMAG](https://www.emag.ro) — extragerea datelor pentru o categorie specifică de produse (ex. laptopuri).
 
 ---
 
@@ -97,7 +97,7 @@ python benchmarks/compare.py
 
 ## 📊 Date extrase
 
-Pentru fiecare produs extras de pe site-urile vizate (eMAG, Altex):
+Pentru fiecare produs extras de pe eMAG:
 
 - Magazinul sursă (Store)
 - Denumire produs
@@ -118,7 +118,7 @@ Pentru fiecare produs extras de pe site-urile vizate (eMAG, Altex):
 ## ⚠️ Note
 
 - Scraping-ul este realizat exclusiv în **scop educațional**, pentru a demonstra diferențele de performanță între execuția secvențială și cea paralelă din cadrul cursului APD.
-- S-a adăugat delay între request-uri pentru a nu supraîncărca serverele magazinelor și pentru a evita pe cât posibil blocajele (ex. CAPTCHA, Rate Limiting).
+- S-a adăugat delay între request-uri pentru a nu supraîncărca serverul eMAG și pentru a evita pe cât posibil blocajele (ex. CAPTCHA, Rate Limiting).
 - Se recomandă folosirea de headere corespunzătoare (`User-Agent`) la rulare.
 
 ---
